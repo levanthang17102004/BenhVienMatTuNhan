@@ -15,3 +15,7 @@ backend/dist/
 # LOGS
 npm-debug.log*
 yarn-error.log*
+
+# lock
+back-end/package-lock.json
+fron-end/yarn.lock
