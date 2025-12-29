@@ -1,6 +1,6 @@
 # Env
-backend/.env
-frontend/.env
+back-end/.env
+front-end/.env
 
 # Node
 node_modules/
