@@ -5,49 +5,28 @@ const paymentSchema = new mongoose.Schema(
         appointment_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Appointment",
+            unique: true,
             required: true,
-            unique: true, // 1 appointment chỉ có 1 payment
-            index: true,
         },
 
-        amount: {
-            type: Number,
-            required: true,
-            min: 0,
-        },
+        amount: Number,
 
         method: {
             type: String,
-            enum: ["CASH", "VNPAY", "MOMO", "STRIPE", "PAYPAL"],
-            required: true,
-            index: true,
+            enum: ["CASH", "VNPAY", "MOMO", "STRIPE"],
         },
 
         status: {
             type: String,
-            enum: ["PENDING", "SUCCESS", "FAILED", "CANCELLED"],
+            enum: ["PENDING", "SUCCESS", "FAILED"],
             default: "PENDING",
-            index: true,
         },
 
-        paidAt: {
-            type: Date,
-        },
-
-        transactionId: {
-            type: String,
-            trim: true,
-            index: true,
-        },
-
-        gatewayResponse: {
-            type: String, // lưu raw response (JSON string)
-        },
+        paidAt: Date,
+        transactionId: String,
+        gatewayResponse: String,
     },
-    {
-        timestamps: true, // createdAt, updatedAt
-        versionKey: false,
-    }
+    { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model("Payment", paymentSchema);
