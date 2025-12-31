@@ -2,52 +2,25 @@ const mongoose = require("mongoose");
 
 const newsSchema = new mongoose.Schema(
     {
-        title: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-
-        slug: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            index: true,
-        },
-
-        description: {
-            type: String,
-            required: true,
-        },
+        title: String,
+        slug: { type: String, unique: true },
+        description: String,
 
         author_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: true,
-            index: true,
         },
 
-        publicationDate: {
-            type: Date,
-        },
-
-        relatedImages: {
-            type: [String],
-            default: [],
-        },
+        publicationDate: Date,
+        relatedImages: [String],
 
         status: {
             type: String,
-            enum: ["DRAFT", "PUBLISHED", "ARCHIVED"],
+            enum: ["DRAFT", "PUBLISHED"],
             default: "DRAFT",
-            index: true,
         },
     },
-    {
-        timestamps: true, // createdAt, updatedAt
-        versionKey: false,
-    }
+    { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model("News", newsSchema);
